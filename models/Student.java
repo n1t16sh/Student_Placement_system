@@ -16,7 +16,7 @@ public class Student {
         this.name = name;
         this.cgpa = cgpa;
         this.skills = skills;
-        this.placed = false; // default
+        this.placed = false; 
     }
 
     // Getters
@@ -40,7 +40,7 @@ public class Student {
         return placed;
     }
 
-    // Setter
+    
     public void setPlaced(boolean placed) {
         this.placed = placed;
     }

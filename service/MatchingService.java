@@ -6,7 +6,6 @@ import models.Company;
 
 public class MatchingService {
 
-    // Skill match function
     public static boolean skillMatch(ArrayList<String> studentSkills,
                                      ArrayList<String> companySkills) {
 
@@ -18,7 +17,7 @@ public class MatchingService {
         return false;
     }
 
-    // Main matching function
+
     public static void matchInternships(ArrayList<Student> students,
                                         ArrayList<Company> companies) {
 
@@ -26,7 +25,6 @@ public class MatchingService {
 
         for (Student s : students) {
 
-            // Skip already placed students
             if (s.isPlaced()) {
                 continue;
             }
@@ -35,22 +33,18 @@ public class MatchingService {
 
             for (Company c : companies) {
 
-                // CGPA check
                 if (s.getCgpa() < c.getMinCgpa()) {
                     continue;
                 }
 
-                // Skill check
                 if (!skillMatch(s.getSkills(), c.getRequiredSkills())) {
                     continue;
                 }
 
-                // Slot check
                 if (c.getInternshipSlots() <= 0) {
                     continue;
                 }
 
-                // MATCH FOUND
                 System.out.println(s.getName() +
                         " placed in " + c.getName());
 

@@ -10,14 +10,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        // Step 1: Load sample data
+
         ArrayList<Student> students = SampleData.getStudents();
         ArrayList<Company> companies = SampleData.getCompanies();
 
-        // Step 2: Run matching
+
         MatchingService.matchInternships(students, companies);
 
-        // Step 3: Final report
         System.out.println("\n--- Final Placement Report ---");
 
         for (Student s : students) {

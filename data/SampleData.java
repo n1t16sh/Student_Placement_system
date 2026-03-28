@@ -7,7 +7,6 @@ import models.Company;
 
 public class SampleData {
 
-    // Create sample students
     public static ArrayList<Student> getStudents() {
 
         ArrayList<Student> students = new ArrayList<>();
@@ -52,7 +51,6 @@ public class SampleData {
     }
 
 
-    // Create sample companies
     public static ArrayList<Company> getCompanies() {
 
         ArrayList<Company> companies = new ArrayList<>();

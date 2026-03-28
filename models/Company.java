@@ -10,7 +10,6 @@ public class Company {
     private ArrayList<String> requiredSkills;
     private int internshipSlots;
 
-    // Constructor
     public Company(int id, String name, double minCgpa,
                    ArrayList<String> requiredSkills, int internshipSlots) {
 
@@ -21,7 +20,7 @@ public class Company {
         this.internshipSlots = internshipSlots;
     }
 
-    // Getters
+    // Getting function
     public int getId() {
         return id;
     }
@@ -42,7 +41,7 @@ public class Company {
         return internshipSlots;
     }
 
-    // Reduce slot when student is placed
+
     public void reduceSlot() {
         if (internshipSlots > 0) {
             internshipSlots--;
