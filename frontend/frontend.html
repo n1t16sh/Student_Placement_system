@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Placement System</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:linear-gradient(135deg,#dfeeea,#c7e8dc,#eaf7f3);
+color:#2f4f4f;
+}
+
+/* Navbar */
+
+.navbar{
+display:flex;
+justify-content:space-between;
+padding:15px 30px;
+background:rgba(255,255,255,0.6);
+}
+
+.menu a{
+margin:0 8px;
+text-decoration:none;
+color:#2f4f4f;
+padding:8px 15px;
+border-radius:20px;
+background:rgba(255,255,255,0.7);
+cursor:pointer;
+}
+
+/* Sections */
+
+.section{
+display:none;
+text-align:center;
+margin-top:80px;
+}
+
+.active{
+display:block;
+}
+
+/* Cards */
+
+.card{
+background:rgba(255,255,255,0.6);
+padding:30px;
+width:260px;
+margin:15px auto;
+border-radius:15px;
+box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Buttons */
+
+button{
+margin-top:10px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#7bc4a4;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#5aa889;
+}
+
+/* Inputs */
+
+input{
+width:90%;
+padding:8px;
+margin:5px;
+}
+
+/* Layout */
+
+.row{
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<div class="navbar">
+<div><b>Placement System</b></div>
+
+<div class="menu">
+<a onclick="show('main')">Home</a>
+<a onclick="logout()">Logout</a>
+</div>
+</div>
+
+<!-- MAIN PAGE -->
+
+<div id="main" class="section active">
+
+<h1>Select User</h1>
+
+<div class="row">
+<div class="card">
+<h3>Student</h3>
+<button onclick="show('studentAuth')">Enter</button>
+</div>
+
+<div class="card">
+<h3>Company</h3>
+<button onclick="show('companyAuth')">Enter</button>
+</div>
+</div>
+
+</div>
+
+<!-- STUDENT AUTH -->
+
+<div id="studentAuth" class="section">
+
+<h1>Student</h1>
+
+<div class="card">
+
+<input id="sName" placeholder="Student Name" style="display:none;">
+<input id="sEmail" placeholder="Email">
+<input id="sPass" placeholder="Password">
+
+<button onclick="handleStudentRegister()">Register</button>
+<button onclick="studentLogin()">Login</button>
+
+</div>
+
+</div>
+
+<!-- COMPANY AUTH -->
+
+<div id="companyAuth" class="section">
+
+<h1>Company</h1>
+
+<div class="card">
+
+<input id="cName" placeholder="Company Name" style="display:none;">
+<input id="cEmail" placeholder="Email">
+<input id="cPass" placeholder="Password">
+
+<button onclick="handleCompanyRegister()">Register</button>
+<button onclick="companyLogin()">Login</button>
+
+</div>
+
+</div>
+
+<!-- STUDENT DASHBOARD -->
+
+<div id="studentDash" class="section">
+
+<h1>Student Dashboard</h1>
+
+<div class="card">
+<h3>Find Placement</h3>
+<button onclick="findPlacement()">Search</button>
+<p id="studentResult"></p>
+</div>
+
+</div>
+
+<!-- COMPANY DASHBOARD -->
+
+<div id="companyDash" class="section">
+
+<h1>Company Dashboard</h1>
+
+<div class="row">
+
+<!-- INTERNSHIP -->
+
+<div class="card">
+<h3>Add Internship</h3>
+<input id="iname" placeholder="Internship Name">
+<input id="iskills" placeholder="Skills">
+<input id="icgpa" placeholder="CGPA">
+<input id="islots" placeholder="Slots Available">
+<button onclick="addInternship()">Add</button>
+</div>
+
+<!-- PLACEMENT -->
+
+<div class="card">
+<h3>Add Placement</h3>
+<input id="pname" placeholder="Placement Role">
+<input id="pskills" placeholder="Skills">
+<input id="pcgpa" placeholder="CGPA">
+<input id="pslots" placeholder="Slots Available">
+<button onclick="addPlacement()">Add</button>
+</div>
+
+<!-- FIND STUDENTS -->
+
+<div class="card">
+<h3>Find Students</h3>
+<button onclick="findStudents()">Search</button>
+<p id="companyResult"></p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+/* Navigation */
+
+function show(id){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+function logout(){
+show('main');
+}
+
+/* Show Name Fields */
+
+function showStudentName(){
+sName.style.display="block";
+}
+
+function showCompanyName(){
+cName.style.display="block";
+}
+
+/* Data */
+
+let students = [];
+let companies = [];
+let internships = [];
+let placements = [];
+
+/* Handle Register */
+
+function handleStudentRegister(){
+if(sName.style.display==="none"){
+showStudentName();
+} else {
+studentRegister();
+}
+}
+
+function handleCompanyRegister(){
+if(cName.style.display==="none"){
+showCompanyName();
+} else {
+companyRegister();
+}
+}
+
+/* Student Register */
+
+function studentRegister(){
+if(sName.value==="" || sEmail.value==="" || sPass.value==="") return;
+
+students.push({
+name:sName.value,
+email:sEmail.value,
+password:sPass.value,
+skills:"java",
+cgpa:8
+});
+
+show('studentDash');
+}
+
+/* Student Login */
+
+function studentLogin(){
+show('studentDash');
+}
+
+/* Company Register */
+
+function companyRegister(){
+if(cName.value==="" || cEmail.value==="" || cPass.value==="") return;
+
+companies.push({
+name:cName.value,
+email:cEmail.value,
+password:cPass.value
+});
+
+show('companyDash');
+}
+
+/* Company Login */
+
+function companyLogin(){
+show('companyDash');
+}
+
+/* Add Internship */
+
+function addInternship(){
+internships.push({
+name:iname.value,
+skills:iskills.value,
+cgpa:icgpa.value,
+slots:islots.value
+});
+}
+
+/* Add Placement */
+
+function addPlacement(){
+placements.push({
+name:pname.value,
+skills:pskills.value,
+cgpa:pcgpa.value,
+slots:pslots.value
+});
+}
+
+/* Find Placement */
+
+function findPlacement(){
+
+let result="Not placed";
+
+for(let i of placements){
+if(i.skills=="java" && i.slots>0){
+result="Placed in "+i.name;
+i.slots--; // reduce slot
+break;
+}
+}
+
+studentResult.innerText=result;
+}
+
+/* Find Students */
+
+function findStudents(){
+
+let result="";
+
+for(let s of students){
+result+=s.name+" ";
+}
+
+companyResult.innerText=result || "No students";
+}
+
+</script>
+
+</body>
+</html>
