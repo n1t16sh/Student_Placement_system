@@ -12,8 +12,6 @@ background:linear-gradient(135deg,#dfeeea,#c7e8dc,#eaf7f3);
 color:#2f4f4f;
 }
 
-/* Navbar */
-
 .navbar{
 display:flex;
 justify-content:space-between;
@@ -31,7 +29,6 @@ background:rgba(255,255,255,0.7);
 cursor:pointer;
 }
 
-/* Sections */
 
 .section{
 display:none;
@@ -43,8 +40,6 @@ margin-top:80px;
 display:block;
 }
 
-/* Cards */
-
 .card{
 background:rgba(255,255,255,0.6);
 padding:30px;
@@ -54,7 +49,6 @@ border-radius:15px;
 box-shadow:0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Buttons */
 
 button{
 margin-top:10px;
@@ -70,7 +64,6 @@ button:hover{
 background:#5aa889;
 }
 
-/* Inputs */
 
 input{
 width:90%;
@@ -78,7 +71,6 @@ padding:8px;
 margin:5px;
 }
 
-/* Layout */
 
 .row{
 display:flex;
@@ -93,7 +85,6 @@ flex-wrap:wrap;
 
 <body>
 
-<!-- NAVBAR -->
 
 <div class="navbar">
 <div><b>Placement System</b></div>
@@ -104,7 +95,6 @@ flex-wrap:wrap;
 </div>
 </div>
 
-<!-- MAIN PAGE -->
 
 <div id="main" class="section active">
 
@@ -124,7 +114,6 @@ flex-wrap:wrap;
 
 </div>
 
-<!-- STUDENT AUTH -->
 
 <div id="studentAuth" class="section">
 
@@ -162,8 +151,6 @@ flex-wrap:wrap;
 
 </div>
 
-<!-- STUDENT DASHBOARD -->
-
 <div id="studentDash" class="section">
 
 <h1>Student Dashboard</h1>
@@ -176,15 +163,12 @@ flex-wrap:wrap;
 
 </div>
 
-<!-- COMPANY DASHBOARD -->
-
 <div id="companyDash" class="section">
 
 <h1>Company Dashboard</h1>
 
 <div class="row">
 
-<!-- INTERNSHIP -->
 
 <div class="card">
 <h3>Add Internship</h3>
@@ -195,8 +179,6 @@ flex-wrap:wrap;
 <button onclick="addInternship()">Add</button>
 </div>
 
-<!-- PLACEMENT -->
-
 <div class="card">
 <h3>Add Placement</h3>
 <input id="pname" placeholder="Placement Role">
@@ -205,8 +187,6 @@ flex-wrap:wrap;
 <input id="pslots" placeholder="Slots Available">
 <button onclick="addPlacement()">Add</button>
 </div>
-
-<!-- FIND STUDENTS -->
 
 <div class="card">
 <h3>Find Students</h3>
@@ -220,8 +200,6 @@ flex-wrap:wrap;
 
 <script>
 
-/* Navigation */
-
 function show(id){
 document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
@@ -231,8 +209,6 @@ function logout(){
 show('main');
 }
 
-/* Show Name Fields */
-
 function showStudentName(){
 sName.style.display="block";
 }
@@ -241,14 +217,11 @@ function showCompanyName(){
 cName.style.display="block";
 }
 
-/* Data */
-
 let students = [];
 let companies = [];
 let internships = [];
 let placements = [];
 
-/* Handle Register */
 
 function handleStudentRegister(){
 if(sName.style.display==="none"){
@@ -266,7 +239,6 @@ companyRegister();
 }
 }
 
-/* Student Register */
 
 function studentRegister(){
 if(sName.value==="" || sEmail.value==="" || sPass.value==="") return;
@@ -282,13 +254,10 @@ cgpa:8
 show('studentDash');
 }
 
-/* Student Login */
-
 function studentLogin(){
 show('studentDash');
 }
 
-/* Company Register */
 
 function companyRegister(){
 if(cName.value==="" || cEmail.value==="" || cPass.value==="") return;
@@ -302,13 +271,9 @@ password:cPass.value
 show('companyDash');
 }
 
-/* Company Login */
-
 function companyLogin(){
 show('companyDash');
 }
-
-/* Add Internship */
 
 function addInternship(){
 internships.push({
@@ -319,8 +284,6 @@ slots:islots.value
 });
 }
 
-/* Add Placement */
-
 function addPlacement(){
 placements.push({
 name:pname.value,
@@ -329,8 +292,6 @@ cgpa:pcgpa.value,
 slots:pslots.value
 });
 }
-
-/* Find Placement */
 
 function findPlacement(){
 
@@ -346,8 +307,6 @@ break;
 
 studentResult.innerText=result;
 }
-
-/* Find Students */
 
 function findStudents(){
 

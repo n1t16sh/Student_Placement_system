@@ -1,10 +1,10 @@
-package service;
+package backend;
 
 import java.util.ArrayList;
 import models.Student;
 import models.Company;
 
-public class MatchingService {
+public class Matching {
 
     public static boolean skillMatch(ArrayList<String> studentSkills,
                                      ArrayList<String> companySkills) {
