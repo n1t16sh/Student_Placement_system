@@ -1,62 +1,14 @@
 package service;
+
 import java.util.ArrayList;
 import models.Student;
 import models.Company;
 
 public class MatchingService {
 
-    public static void matchStudents(ArrayList<Student> students, ArrayList<Company> companies) {
-
-        for (Student s : students) {
-
-            System.out.println("\nTrying to place: " + s.getName());
-
-            boolean placed = false;
-
-            for (int pref : s.getPreferences()) {
-
-                Company c = findCompanyById(companies, pref);
-
-                if (c == null) continue;
-
-                if (s.getCgpa() < c.getMinCgpa()) {
-                    continue;
-                }
-
-                
-                if (!hasMatchingSkill(s.getSkills(), c.getRequiredSkills())) {
-                    continue;
-                }
-
-                if (c.getCapacity() <= 0) {
-                    continue;
-                }
-
-                
-                System.out.println(s.getName() + " placed in " + c.getName());
-
-                c.setCapacity(c.getCapacity() - 1);
-                placed = true;
-
-                break;
-            }
-
-            if (!placed) {
-                System.out.println(s.getName() + " not placed");
-            }
-        }
-    }
-
-    private static Company findCompanyById(ArrayList<Company> companies, int id) {
-        for (Company c : companies) {
-            if (c.getId() == id) {
-                return c;
-            }
-        }
-        return null;
-    }
-
-    private static boolean hasMatchingSkill(ArrayList<String> studentSkills, ArrayList<String> companySkills) {
+    // Skill match function
+    public static boolean skillMatch(ArrayList<String> studentSkills,
+                                     ArrayList<String> companySkills) {
 
         for (String skill : studentSkills) {
             if (companySkills.contains(skill)) {
@@ -64,5 +16,53 @@ public class MatchingService {
             }
         }
         return false;
+    }
+
+    // Main matching function
+    public static void matchInternships(ArrayList<Student> students,
+                                        ArrayList<Company> companies) {
+
+        System.out.println("\n--- Internship Matching ---");
+
+        for (Student s : students) {
+
+            // Skip already placed students
+            if (s.isPlaced()) {
+                continue;
+            }
+
+            boolean placed = false;
+
+            for (Company c : companies) {
+
+                // CGPA check
+                if (s.getCgpa() < c.getMinCgpa()) {
+                    continue;
+                }
+
+                // Skill check
+                if (!skillMatch(s.getSkills(), c.getRequiredSkills())) {
+                    continue;
+                }
+
+                // Slot check
+                if (c.getInternshipSlots() <= 0) {
+                    continue;
+                }
+
+                // MATCH FOUND
+                System.out.println(s.getName() +
+                        " placed in " + c.getName());
+
+                c.reduceSlot();
+                s.setPlaced(true);
+                placed = true;
+                break;
+            }
+
+            if (!placed) {
+                System.out.println(s.getName() + " not selected");
+            }
+        }
     }
 }
