@@ -65,4 +65,9 @@ public class MatchingService {
             }
         }
     }
+
+	public static void matchStudents(ArrayList<Student> students, ArrayList<Company> companies) {
+		
+		throw new UnsupportedOperationException("Unimplemented method 'matchStudents'");
+	}
 }
